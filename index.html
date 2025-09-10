@@ -1,11 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>수학 개념 정리</title>
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        .math-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .formula {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>수학 개념 정리</h1>
+
+    <div class="math-section">
+        <h2>1. 함수 (Function)</h2>
+        <p>한 집합의 원소를 다른 집합의 원소에 대응시키는 관계를 의미합니다.</p>
+        <div class="formula">
+            y = f(x) : x는 정의역, y는 공역
+        </div>
+    </div>
+
+    <div class="math-section">
+        <h2>2. 미분 (Differentiation)</h2>
+        <p>함수의 순간변화율을 구하는 과정입니다.</p>
+        <div class="formula">
+            f'(x) = lim[h→0] (f(x+h) - f(x)) / h
+        </div>
+    </div>
+
+    <div class="math-section">
+        <h2>3. 적분 (Integration)</h2>
+        <p>미분의 역과정으로, 곡선 아래의 면적을 구하는 과정입니다.</p>
+        <div class="formula">
+            ∫f(x)dx = F(x) + C
+        </div>
+    </div>
+
+    <div class="math-section">
+        <h2>4. 삼각함수 (Trigonometric Functions)</h2>
+        <p>직각삼각형의 각과 변의 비율을 나타내는 함수입니다.</p>
+        <div class="formula">
+            sin θ = 대변/빗변<br>
+            cos θ = 인접변/빗변<br>
+            tan θ = 대변/인접변
+        </div>
+    </div>
+
+    <div class="math-section">
+        <h2>5. 로그 (Logarithm)</h2>
+        <p>지수함수의 역함수입니다.</p>
+        <div class="formula">
+            log<sub>a</sub>x = y ⇔ a<sup>y</sup> = x
+        </div>
+    </div>
 </body>
 </html>
