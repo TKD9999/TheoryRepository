@@ -3,81 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>수학 개념 정리</title>
+    <title>공학용 계산기 & 메모장</title>
     <style>
         body {
             font-family: 'Nanum Gothic', sans-serif;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            line-height: 1.6;
         }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+        .container {
+            display: flex;
+            gap: 20px;
         }
-        h2 {
-            color: #34495e;
-            margin-top: 30px;
-        }
-        .math-section {
-            background-color: #f8f9fa;
+        .calculator, .memo {
+            flex: 1;
             padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .formula {
+        .calculator {
+            background-color: #f8f9fa;
+        }
+        #display {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-align: right;
+            padding: 5px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             background-color: #e9ecef;
+        }
+        button:hover {
+            background-color: #dee2e6;
+        }
+        .operator {
+            background-color: #3498db;
+            color: white;
+        }
+        #memo-input {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
             padding: 10px;
-            border-left: 4px solid #3498db;
-            margin: 10px 0;
+        }
+        #memo-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .memo-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f8f9fa;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>수학 개념 정리</h1>
-
-    <div class="math-section">
-        <h2>1. 함수 (Function)</h2>
-        <p>한 집합의 원소를 다른 집합의 원소에 대응시키는 관계를 의미합니다.</p>
-        <div class="formula">
-            y = f(x) : x는 정의역, y는 공역
+    <h1>공학용 계산기 & 메모장</h1>
+    <div class="container">
+        <div class="calculator">
+            <h2>공학용 계산기</h2>
+            <input type="text" id="display" readonly>
+            <div class="buttons">
+                <button onclick="addToDisplay('7')">7</button>
+                <button onclick="addToDisplay('8')">8</button>
+                <button onclick="addToDisplay('9')">9</button>
+                <button class="operator" onclick="addToDisplay('/')">/</button>
+                <button onclick="addToDisplay('4')">4</button>
+                <button onclick="addToDisplay('5')">5</button>
+                <button onclick="addToDisplay('6')">6</button>
+                <button class="operator" onclick="addToDisplay('*')">×</button>
+                <button onclick="addToDisplay('1')">1</button>
+                <button onclick="addToDisplay('2')">2</button>
+                <button onclick="addToDisplay('3')">3</button>
+                <button class="operator" onclick="addToDisplay('-')">-</button>
+                <button onclick="addToDisplay('0')">0</button>
+                <button onclick="addToDisplay('.')">.</button>
+                <button onclick="calculate()">=</button>
+                <button class="operator" onclick="addToDisplay('+')">+</button>
+                <button onclick="addToDisplay('(')">(</button>
+                <button onclick="addToDisplay(')')">)</button>
+                <button onclick="addToDisplay('Math.sin(')">sin</button>
+                <button onclick="addToDisplay('Math.cos(')">cos</button>
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="addToDisplay('Math.sqrt(')">√</button>
+                <button onclick="addToDisplay('Math.pow(')">x^n</button>
+                <button onclick="addToDisplay('Math.PI')">π</button>
+            </div>
+        </div>
+        
+        <div class="memo">
+            <h2>메모장</h2>
+            <textarea id="memo-input" placeholder="여기에 메모를 입력하세요..."></textarea>
+            <button onclick="saveMemo()">메모 저장</button>
+            <div id="memo-list"></div>
         </div>
     </div>
 
-    <div class="math-section">
-        <h2>2. 미분 (Differentiation)</h2>
-        <p>함수의 순간변화율을 구하는 과정입니다.</p>
-        <div class="formula">
-            f'(x) = lim[h→0] (f(x+h) - f(x)) / h
-        </div>
-    </div>
+    <script>
+        // 계산기 기능
+        function addToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
 
-    <div class="math-section">
-        <h2>3. 적분 (Integration)</h2>
-        <p>미분의 역과정으로, 곡선 아래의 면적을 구하는 과정입니다.</p>
-        <div class="formula">
-            ∫f(x)dx = F(x) + C
-        </div>
-    </div>
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
 
-    <div class="math-section">
-        <h2>4. 삼각함수 (Trigonometric Functions)</h2>
-        <p>직각삼각형의 각과 변의 비율을 나타내는 함수입니다.</p>
-        <div class="formula">
-            sin θ = 대변/빗변<br>
-            cos θ = 인접변/빗변<br>
-            tan θ = 대변/인접변
-        </div>
-    </div>
+        function calculate() {
+            try {
+                const result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
 
-    <div class="math-section">
-        <h2>5. 로그 (Logarithm)</h2>
-        <p>지수함수의 역함수입니다.</p>
-        <div class="formula">
-            log<sub>a</sub>x = y ⇔ a<sup>y</sup> = x
-        </div>
-    </div>
+        // 메모 기능
+        function saveMemo() {
+            const memoInput = document.getElementById('memo-input');
+            const memoText = memoInput.value;
+            if (memoText.trim() === '') return;
+
+            const memos = JSON.parse(localStorage.getItem('memos') || '[]');
+            memos.push({
+                text: memoText,
+                date: new Date().toLocaleString()
+            });
+            localStorage.setItem('memos', JSON.stringify(memos));
+            
+            memoInput.value = '';
+            displayMemos();
+        }
+
+        function displayMemos() {
+            const memoList = document.getElementById('memo-list');
+            const memos = JSON.parse(localStorage.getItem('memos') || '[]');
+            
+            memoList.innerHTML = memos.map((memo, index) => `
+                <div class="memo-item">
+                    <p>${memo.text}</p>
+                    <small>${memo.date}</small>
+                    <button onclick="deleteMemo(${index})">삭제</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteMemo(index) {
+            const memos = JSON.parse(localStorage.getItem('memos') || '[]');
+            memos.splice(index, 1);
+            localStorage.setItem('memos', JSON.stringify(memos));
+            displayMemos();
+        }
+
+        // 페이지 로드 시 저장된 메모 표시
+        window.onload = displayMemos;
+    </script>
 </body>
 </html>
